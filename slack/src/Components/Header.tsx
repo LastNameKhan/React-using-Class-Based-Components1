@@ -5,7 +5,7 @@ import {
   GetStartedButton,
   StyledImg,
   StyledTextDiv,
-} from "./Styling/Styling.style";
+} from "./Styling/Styling.styles";
 class Header extends Component {
   render() {
     return (
@@ -40,8 +40,7 @@ class Header extends Component {
             </Box>
           </Grid>
           <Grid item>
-            <StyledTextDiv
-            >
+            <StyledTextDiv>
               <Typography style={{ fontSize: "50px", fontWeight: "700" }}>
                 Where Work Happens
               </Typography>

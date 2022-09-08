@@ -5,7 +5,7 @@ import {
   StyledDiv,
   StyledImg,
   StyledTextDiv,
-} from "./Styling.style";
+} from "./Styling.styles";
 
 export {
   LogoImage,

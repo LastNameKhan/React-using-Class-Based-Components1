@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Grid, Box, Typography, Button } from "@mui/material";
-import { LogoImage, StyledButton, StyledDiv } from "./Styling/Styling.style";
+import { LogoImage, StyledButton, StyledDiv } from "./Styling/Styling.styles";
 
 export class Footer extends Component {
   render() {
