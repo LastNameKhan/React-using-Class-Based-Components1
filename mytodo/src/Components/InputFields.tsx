@@ -101,11 +101,12 @@ class InputFields extends Component<MyProps, MyState> {
     this.setState({ currentValue: e.target.value });
   };
   render() {
+    console.log(this.state.todos, "todos here");
     const mylist = this.state.todos.map((todo: any) => (
       <li>
-        {todo.name}
-        {todo.status}
-        <button onClick={() => this.onToggleEdit(todo)}>Edit</button>
+        {todo.name} {" "}
+        {todo.status} { " "}
+        <button onClick={() => this.onToggleEdit(todo)}>Edit</button>{" "}
         <button onClick={() => this.onDeleteTask(todo.id)}>Remove</button>
       </li>
     ));
@@ -153,9 +154,21 @@ class InputFields extends Component<MyProps, MyState> {
               </StyledAddButton>
             </form>
           )}
-
           <ol>{mylist}</ol>
-          <Todo data={this.state.todos} />
+          {/* <ol>{mylist}</ol> */}
+          {/* {this.state.todos.map((todo: any) => (
+            <ol>
+              <li>
+                {todo.name}
+                {todo.status}
+                <button onClick={() => this.onToggleEdit(todo)}>Edit</button>
+                <button onClick={() => this.onDeleteTask(todo.id)}>
+                  Remove
+                </button>
+              </li>
+            </ol>
+          ))} */}
+          {/* <Todo data={this.state.todos} /> */}
         </StyledContainer>
       </div>
     );

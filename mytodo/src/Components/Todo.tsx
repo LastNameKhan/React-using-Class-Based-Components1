@@ -8,7 +8,7 @@ type MyProps = {
 
 class Todo extends Component<MyProps, MyState> {
   render() {
-    console.log(this.props.todos)
+    console.log(this.props.todos,"Props Here")
     return (
       <div>
         <ol>{this.props.todos}</ol>

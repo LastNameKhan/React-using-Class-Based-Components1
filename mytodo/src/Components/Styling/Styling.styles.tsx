@@ -57,7 +57,7 @@ export const StyledHeading = styled.p`
 `;
 
 export const StyledContainer = styled.div`
-  height: 400px;
+  height: fit-content;
   width: 350px;
   margin: auto;
   margin-top: 100px;
