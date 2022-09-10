@@ -23,8 +23,8 @@ class Navbar extends Component<MyProps, MyState> {
   state: any = {
     money: [],
     debit: [],
-    value: "",
-    debitvalue: "",
+    value: 0,
+    debitvalue: 0,
     reason: "",
     addsalary: true,
     showaddexpense: false,
@@ -63,9 +63,11 @@ class Navbar extends Component<MyProps, MyState> {
       for: this.state.reason,
       id: Date.now(),
     };
-    if (this.state.debitvalue !== "") {
+    if (this.state.debitvalue !== 0) {
       this.setState({ debit: this.state.debit.concat(obj1) });
-      this.setState({ debitvalue: "" });
+      this.setState({ debitvalue: 0 });
+    } else {
+      alert("Please enter the valid value");
     }
   };
 
@@ -80,7 +82,7 @@ class Navbar extends Component<MyProps, MyState> {
       salary: this.state.value,
       id: Date.now(),
     };
-    if (this.state.value !== "") {
+    if (this.state.value !== 0) {
       this.setState({ money: this.state.money.concat(obj) });
       this.setState({ value: "" });
     }
@@ -142,13 +144,14 @@ class Navbar extends Component<MyProps, MyState> {
           <div>
             {this.state.addsalary ? (
               <Button
+                style={{ marginTop: "6px", marginLeft: "8px" }}
                 variant="contained"
                 onClick={() => this.handleShowMoneyOnclick()}
               >
                 Add Money
               </Button>
             ) : (
-              <h3>5000</h3>
+              <h3>{this.state.money.value}</h3>
             )}
             {this.state.showAddmoney && (
               <div
@@ -176,6 +179,7 @@ class Navbar extends Component<MyProps, MyState> {
           <div>
             {this.state.showaddexpense && (
               <Button
+                style={{ marginTop: "6px", marginRight: "6px" }}
                 variant="outlined"
                 onClick={() => this.handleShowExpenseClick()}
               >

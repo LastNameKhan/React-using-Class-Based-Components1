@@ -3,15 +3,24 @@ import "./App.css";
 import InputFields from "./Components/InputFields";
 import NewTransaction from "./Components/NewTransaction";
 import Navbar from "./Components/Navbar";
+import { createGlobalStyle } from "styled-components";
 
-export class App extends Component {
+const GlobalStyle = createGlobalStyle`
+  body {
+    background-color: #1c1c1c;
+    color: white;
+  }
+`;
+
+class App extends Component {
   render() {
     return (
-      <div>
-        <Navbar />
-        {/* <NewTransaction /> */}
+      <>
+        <GlobalStyle />
+        {/* <Navbar /> */}
+        <NewTransaction />
         {/* <InputFields /> */}
-      </div>
+      </>
     );
   }
 }

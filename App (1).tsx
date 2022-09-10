@@ -8,7 +8,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import React, { Component } from "react";
+import React from "react";
 
 interface IProps {}
 
@@ -26,7 +26,7 @@ interface IState {
   spend: string;
 }
 
-class NewTransaction extends Component<IProps, IState> {
+export default class App extends React.Component<IProps, IState> {
   constructor(props: IProps) {
     super(props);
 
@@ -36,13 +36,13 @@ class NewTransaction extends Component<IProps, IState> {
       isOpen: false,
       amountTextField: "",
       isExpensesOpen: false,
-      spend: "",
+      spend: '',
     };
   }
 
-  toggleModal = (type: string = "") => {
+  toggleModal = (type: string = '') => {
     switch (type) {
-      case "add_expenses":
+      case 'add_expenses':
         this.setState({
           isExpensesOpen: !this.state.isExpensesOpen,
         });
@@ -53,13 +53,16 @@ class NewTransaction extends Component<IProps, IState> {
         });
         break;
     }
+    
   };
+
 
   addMoney = () => {
     let amount = parseFloat(this.state.amountTextField);
     if (isNaN(amount) || amount < 0) {
       alert("Please enter valid number");
     } else {
+      
       let transition = [
         ...this.state.transition,
         {
@@ -80,30 +83,27 @@ class NewTransaction extends Component<IProps, IState> {
 
   addExpenses = () => {
     let amount = parseFloat(this.state.amountTextField);
-    if (isNaN(amount)) {
-      alert("Please enter valid number!");
+    if(isNaN(amount)) {
+      alert("Please enter valid number!")
     } else {
-      if (amount <= this.state.amount) {
+      if(amount <= this.state.amount) {
         this.setState({
           amount: this.state.amount - amount,
-          transition: [
-            ...this.state.transition,
-            {
-              id: this.state.transition.length,
-              title: this.state.spend,
-              amount: amount,
-              credit: false,
-            },
-          ],
-          amountTextField: "",
-          spend: "",
-        });
-        this.toggleModal("add_expenses");
+          transition: [...this.state.transition, {
+            id: this.state.transition.length,
+            title: this.state.spend,
+            amount: amount,
+            credit: false
+          }],
+          amountTextField: '',
+          spend: '',
+        })
+        this.toggleModal('add_expenses')
       } else {
-        alert("Insufficient Balance");
+        alert("Insufficient Balance")
       }
     }
-  };
+  }
 
   render() {
     return (
@@ -142,23 +142,21 @@ class NewTransaction extends Component<IProps, IState> {
                 <Typography style={{ flex: 1, fontWeight: "700" }}>
                   {item.title}
                 </Typography>
-                <Typography>
-                  {item.credit ? "" : "-"}
-                  {item.amount} Rs
-                </Typography>
+                <Typography>{item.credit ? '':'-'}{item.amount} Rs</Typography>
               </Box>
             );
           })}
-          {this.state.amount > 0 && (
-            <Button
+          {
+            this.state.amount > 0 &&
+              <Button
               variant="contained"
               color="primary"
-              onClick={() => this.toggleModal("add_expenses")}
-              style={{ marginTop: 20 }}
+              onClick={() => this.toggleModal('add_expenses')}
+              style={{marginTop: 20,}}
             >
               Add Expenses
             </Button>
-          )}
+          }
         </Container>
 
         <Dialog open={this.state.isOpen} onClose={() => this.toggleModal()}>
@@ -179,10 +177,8 @@ class NewTransaction extends Component<IProps, IState> {
           </DialogContent>
         </Dialog>
 
-        <Dialog
-          open={this.state.isExpensesOpen}
-          onClose={() => this.toggleModal("add_expenses")}
-        >
+
+        <Dialog open={this.state.isExpensesOpen} onClose={() => this.toggleModal('add_expenses')}>
           <DialogTitle>Add Expenses</DialogTitle>
           <DialogContent>
             <TextField
@@ -193,22 +189,19 @@ class NewTransaction extends Component<IProps, IState> {
                 this.setState({ amountTextField: e.target.value })
               }
               fullWidth
-              style={{ marginTop: 10 }}
+              style={{marginTop: 10}}
             />
             <TextField
               variant="outlined"
               label="Spend"
               value={this.state.spend}
-              onChange={(e) => this.setState({ spend: e.target.value })}
+              onChange={(e) =>
+                this.setState({ spend: e.target.value })
+              }
               fullWidth
-              style={{ marginTop: 10 }}
+              style={{marginTop: 10}}
             />
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={this.addExpenses}
-              style={{ marginTop: 10 }}
-            >
+            <Button variant="contained" color="primary" onClick={this.addExpenses} style={{marginTop: 10}}>
               Add Expenses
             </Button>
           </DialogContent>
@@ -217,5 +210,3 @@ class NewTransaction extends Component<IProps, IState> {
     );
   }
 }
-
-export default NewTransaction;

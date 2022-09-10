@@ -1,64 +1,75 @@
 import React, { Component } from "react";
+import { Box, Typography, Button, Dialog, DialogTitle } from "@mui/material";
 
 type MyProps = {};
 
 type MyState = {
-  money: any;
-  value: any;
-  salary: any;
-  id: any;
+  salary: number;
+  AllValues: [];
+  ShowAddMoneyOpen: boolean;
+  isOpen: boolean;
 };
 
-class InputFields extends Component<MyProps, MyState> {
-  state: any = {
-    money: [],
-    value: "",
-  };
-  handleOnchangeMoney = (e: any) => {
-    this.setState({ value: e.target.value });
-  };
-
-  onAddMoney = (e: any) => {
-    e.preventDefault();
-
-    const obj = {
-      salary: this.state.value,
-      id: Date.now(),
+export class InputFields extends Component<MyProps, MyState> {
+  constructor(props: MyProps) {
+    super(props);
+    this.state = {
+      salary: 0,
+      AllValues: [],
+      ShowAddMoneyOpen: false,
+      isOpen: false,
     };
-    if (this.state.value !== "") {
-      this.setState({ money: this.state.money.concat(obj) });
-      this.setState({ value: "" });
+  }
+
+  toggleShowEffect = (type: string = "") => {
+    switch (type) {
+      case "add_Salary_Dialog":
+        this.setState({
+          ShowAddMoneyOpen: !this.state.ShowAddMoneyOpen,
+        });
+        break;
+      default:
+        this.setState({
+          isOpen: !this.state.isOpen,
+        });
+        break;
     }
   };
-
   render() {
-    console.log(this.state.money, "Money Here");
-    const myMoney = this.state.money.map((paise: any) => (
-      <div>
-        <h1>Salary :- {paise.salary}</h1>
-        {paise.id}
-      </div>
-    ));
     return (
-      <div
-        style={{
-          height: "100px",
-          width: "200px",
-          border: "2px solid grey",
-          margin: "auto",
-          marginTop: "80px",
-        }}
-      >
-        <div>{myMoney}</div>
-        <form onSubmit={this.onAddMoney}>
-          <input
-            type="number"
-            placeholder="Please enter your money Here..."
-            value={this.state.value}
-            onChange={this.handleOnchangeMoney}
-          ></input>
-          <button onClick={this.onAddMoney}>Add money</button>
-        </form>
+      <div>
+        <Box
+          style={{
+            backgroundColor: "grey",
+            height: "50px",
+            display: "Flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+          }}
+        >
+          {/* {this.state.ShowAddMoneyOpen ? (
+            <Typography style={{ marginLeft: "20px" }}>
+              {this.state.salary}
+            </Typography>
+          ) : ( */}
+          <Button
+            onClick={() => this.toggleShowEffect("add_Salary_Dialog")}
+            style={{
+              color: "white",
+              border: "2px solid black",
+              backgroundColor: "teal",
+              marginLeft: "10px",
+            }}
+            variant="outlined"
+          >
+            Add Money
+          </Button>
+          {/* )
+          } */}
+          <Dialog open={this.state.isOpen} >
+            <DialogTitle></DialogTitle>
+          </Dialog>
+        </Box>
       </div>
     );
   }
