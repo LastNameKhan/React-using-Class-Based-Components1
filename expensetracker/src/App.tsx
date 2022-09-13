@@ -17,8 +17,8 @@ class App extends Component {
     return (
       <>
         <GlobalStyle />
-        {/* <Navbar /> */}
-        <NewTransaction />
+        <Navbar />
+        {/* <NewTransaction /> */}
         {/* <InputFields /> */}
       </>
     );
